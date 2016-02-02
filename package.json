@@ -1,12 +1,12 @@
 {
   "name": "generator-my-h-5",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "description": "This is myun h5 generator by yeoman",
-  "homepage": "https://github.com/myunit/generator-my-h-5.git",
+  "homepage": "https://github.com/myunit/generator-my-h-5",
   "author": {
     "name": "joneqian",
     "email": "qian.qing@aliyun.com",
-    "url": "https://github.com/myunit/generator-my-h-5.git"
+    "url": "https://github.com/myunit/"
   },
   "files": [
     "generators"
