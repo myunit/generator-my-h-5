@@ -1,4 +1,8 @@
-# generator-my-h-5 [![NPM version][npm-image]][npm-url] [![Build Status][travis-image]][travis-url] [![Dependency Status][daviddm-image]][daviddm-url] [![Coverage percentage][coveralls-image]][coveralls-url]
+# generator-my-h-5
+[![Build Status](https://img.shields.io/travis/petecoop/generator-express.svg)](https://travis-ci.org/petecoop/generator-express)
+[![NPM Version](https://img.shields.io/npm/v/generator-express.svg)](https://www.npmjs.org/package/generator-express)
+[![NPM Downloads](https://img.shields.io/npm/dm/generator-express.svg)](https://www.npmjs.org/package/generator-express) 
+
 > This is myun h5 generator by yeoman
 
 ## Installation
