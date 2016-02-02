@@ -10,10 +10,6 @@
 module.exports = function() {
   this.template('_package.json', 'package.json');
 
-  /* #bower */
-  this.template('_bower.json', 'bower.json');
-  this.copy('bowerrc', '.bowerrc');
-
   /* #travis */
   this.copy('travis.yml', '.travis.yml');
 

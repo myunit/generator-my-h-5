@@ -20,7 +20,6 @@
     "async": "latest"
   },
   "devDependencies": {
-    "bower": "latest",
     "jshint-stylish": "latest",
     "gulp": "^3.6.2",
     "gulp-bower": "latest",
