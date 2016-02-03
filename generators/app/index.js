@@ -85,10 +85,7 @@ module.exports = generators.Base.extend({
       }, this);
     },
     assetsDirs: function () {
-      mkdirp.sync('public');
       mkdirp.sync('public/components');
-      mkdirp.sync('public/js');
-      mkdirp.sync('public/css');
       mkdirp.sync('public/img');
     }
   },
