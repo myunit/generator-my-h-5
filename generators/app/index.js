@@ -3,38 +3,19 @@ var yeoman = require('yeoman-generator');
 var chalk = require('chalk');
 var yosay = require('yosay');
 
-module.exports = yeoman.generators.Base.extend({
-  prompting: function () {
-    var done = this.async();
+var MYunGenerator = module.exports = function MYunGenerator(args, options, config) {
+  yeoman.generators.Base.apply(this, arguments);
 
-    // Have Yeoman greet the user.
-    this.log(yosay(
-      'Welcome to the bee\'s knees ' + chalk.red('generator-my-h-5') + ' generator!'
-    ));
+  this.on('end', function () {
+    this.installDependencies({ skipInstall: options['skip-install'] });
+  });
 
-    var prompts = [{
-      type: 'confirm',
-      name: 'someOption',
-      message: 'Would you like to enable this option?',
-      default: true
-    }];
+  this.pkg = JSON.parse(this.readFileAsString(path.join(__dirname, '../package.json')));
+};
 
-    this.prompt(prompts, function (props) {
-      this.props = props;
-      // To access props later use this.props.someOption;
+util.inherits(MYunGenerator, yeoman.generators.Base);
 
-      done();
-    }.bind(this));
-  },
-
-  writing: function () {
-    this.fs.copy(
-      this.templatePath('dummyfile.txt'),
-      this.destinationPath('dummyfile.txt')
-    );
-  },
-
-  install: function () {
-    this.installDependencies();
-  }
-});
+MYunGenerator.prototype.askFor = require('./generator-questions');
+MYunGenerator.prototype.fileStructure = require('./file-structure');
+MYunGenerator.prototype.taskrunner = require('./task-runner');
+MYunGenerator.prototype.configfiles = require('./config-files');
