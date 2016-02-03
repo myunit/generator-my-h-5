@@ -1,22 +1,98 @@
 'use strict';
-var yeoman = require('yeoman-generator');
 var util = require('util');
 var path = require('path');
-var wiring = require('html-wiring');
+var generators = require('yeoman-generator');
+var glob = require('glob');
+var slugify = require('underscore.string/slugify');
+var mkdirp = require('mkdirp');
 
-var MYunGenerator = module.exports = function MYunGenerator(args, options, config) {
-  yeoman.generators.Base.apply(this, arguments);
+module.exports = generators.Base.extend({
+  constructor: function () {
+    generators.Base.apply(this, arguments);
 
-  this.on('end', function () {
-    this.installDependencies({ skipInstall: options['skip-install'] });
-  });
+    // add option to skip install
+    this.option('skip-install');
 
-  this.pkg = JSON.parse(wiring.readFileAsString(path.join(__dirname, '../../package.json')));
-};
+    this.slugify = slugify;
+  },
+  prompting: {
+    dir: function () {
 
-util.inherits(MYunGenerator, yeoman.generators.Base);
+      if (this.options.createDirectory !== undefined) {
+        return true;
+      }
 
-MYunGenerator.prototype.askFor = require('./generator-questions');
-MYunGenerator.prototype.fileStructure = require('./file-structure');
-MYunGenerator.prototype.taskrunner = require('./task-runner');
-MYunGenerator.prototype.configfiles = require('./config-files');
+      var done = this.async();
+      var prompt = [{
+        type: 'confirm',
+        name: 'createDirectory',
+        message: 'Would you like to create a new directory for your project?'
+      }];
+
+      this.prompt(prompt, function (response) {
+        this.options.createDirectory = response.createDirectory;
+        done();
+      }.bind(this));
+    },
+    dirname: function () {
+
+      if (!this.options.createDirectory || this.options.dirname) {
+        return true;
+      }
+
+      var done = this.async();
+      var prompt = [
+        {
+          type: 'input',
+          name: 'dirname',
+          message: 'Enter directory name'
+        },
+        {
+          type: 'input',
+          name: 'description',
+          message: 'Enter project description'
+        },
+        {
+          type: 'input',
+          name: 'author',
+          message: 'Enter project author name'
+        }];
+
+      this.prompt(prompt, function (response) {
+        this.options.dirname = response.dirname;
+        this.options.description = response.description;
+        this.options.author = response.author;
+        done();
+      }.bind(this));
+    }
+  },
+  writing: {
+    buildEnv: function () {
+
+      // create directory
+      if (this.options.createDirectory) {
+        this.destinationRoot(this.options.dirname);
+        this.appName = this.options.dirname;
+      }
+
+      this.description = this.options.description;
+      this.author = this.options.author;
+
+      // shared across all generators
+      this.sourceRoot(path.join(__dirname, 'templates'));
+      glob.sync('**', {cwd: this.sourceRoot()}).map(function (file) {
+        this.template(file, file.replace(/^_/, ''));
+      }, this);
+    },
+    assetsDirs: function () {
+      mkdirp.sync('public');
+      mkdirp.sync('public/components');
+      mkdirp.sync('public/js');
+      mkdirp.sync('public/css');
+      mkdirp.sync('public/img');
+    }
+  },
+  install: function () {
+    if (!this.options['skip-install']) this.installDependencies();
+  }
+});

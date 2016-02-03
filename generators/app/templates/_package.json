@@ -1,8 +1,8 @@
 {
-  "name": "<%= appName %>",
-  "description": "<%= description %>",
+  "name": "<%= slugify(appName) %>",
+  "description": "<%= slugify(description) %>",
   "version": "0.0.0",
-  "author": "",
+  "author": "<%= slugify(author) %>",
   "scripts": {
     "start": "node ./bin/www"
   },
