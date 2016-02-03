@@ -1,7 +1,8 @@
 'use strict';
 var yeoman = require('yeoman-generator');
-var chalk = require('chalk');
-var yosay = require('yosay');
+var util = require('util');
+var path = require('path');
+var wiring = require('html-wiring');
 
 var MYunGenerator = module.exports = function MYunGenerator(args, options, config) {
   yeoman.generators.Base.apply(this, arguments);
@@ -10,7 +11,7 @@ var MYunGenerator = module.exports = function MYunGenerator(args, options, confi
     this.installDependencies({ skipInstall: options['skip-install'] });
   });
 
-  this.pkg = JSON.parse(this.readFileAsString(path.join(__dirname, '../package.json')));
+  this.pkg = JSON.parse(wiring.readFileAsString(path.join(__dirname, '../../package.json')));
 };
 
 util.inherits(MYunGenerator, yeoman.generators.Base);

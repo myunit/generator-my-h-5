@@ -11,14 +11,16 @@
   "files": [
     "generators"
   ],
-  "main": "generators/index.js",
+  "main": "generators/app/index.js",
   "keywords": [
     "yeoman-generator"
   ],
   "dependencies": {
     "yeoman-generator": "^0.21.1",
     "chalk": "^1.0.0",
-    "yosay": "^1.0.2"
+    "yosay": "^1.0.2",
+    "underscore.string": "^3.0.3",
+    "html-wiring": "^1.1.0"
   },
   "devDependencies": {
     "yeoman-assert": "^2.0.0",

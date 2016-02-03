@@ -1,10 +1,10 @@
 {
-  "name": "<%= _.slugify(appname) %>",
-  "description": "",
+  "name": "<%= appName %>",
+  "description": "<%= description %>",
   "version": "0.0.0",
   "author": "",
   "scripts": {
-    "start": "node node_modules/grunt-cli/bin/grunt serve"
+    "start": "node ./bin/www"
   },
   "dependencies": {
     "body-parser": "~1.13.2",
