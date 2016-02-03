@@ -2,7 +2,7 @@
   "name": "generator-myun-h5",
   "version": "0.0.1",
   "description": "This is myun h5 generator by yeoman",
-  "homepage": "https://github.com/myunit/generator-my-h-5",
+  "homepage": "https://github.com/myunit/generator-my-h5",
   "author": {
     "name": "joneqian",
     "email": "qian.qing@aliyun.com",
@@ -40,7 +40,7 @@
       "mocha": true
     }
   },
-  "repository": "myunit/generator-my-h-5",
+  "repository": "myunit/generator-my-h5",
   "scripts": {
     "prepublish": "gulp prepublish",
     "test": "gulp"
